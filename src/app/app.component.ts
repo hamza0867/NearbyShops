@@ -9,10 +9,8 @@ import { ShopComponent } from "./shop/shop.component";
 export class AppComponent implements OnInit {
     public title = "NearbyShops";
     public logo = "../assets/ur.png";
-    public shop = new ShopComponent();
 
-    public ngOnInit() {
-        this.shop.shopName = "Shop 1";
-        this.shop.imgSrc = "../assets/shop.png";
-    }
+    constructor() {}
+
+    public ngOnInit() {}
 }
