@@ -13,14 +13,12 @@ export class ShopComponent implements OnInit {
     @Input() public disliked: boolean;
     @Input() public id: string;
 
-    constructor(shopName: string, imgSrc: string, id: string) {
-        this.shopName = shopName;
-        this.imgSrc = imgSrc;
-        this.id = id;
-    }
+    constructor() {}
 
     public ngOnInit() {
         this.displayName = this.shopName;
+        this.liked = false;
+        this.disliked = false;
     }
 
     public onLike() {

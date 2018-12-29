@@ -16,6 +16,14 @@
             <img src="{{ logo }}" alt="" />
         </div>
     </div>
-    <div class="row"><div class="col-lg-3 col-md-5 col-sm-8 col-8"></div></div>
+    <div class="row">
+        <app-shop
+            class="col-lg-3 col-md-4 col-sm-8 col-8"
+            *ngFor="let shop of shops"
+            [shopName]="shop.name"
+            [imgSrc]="shop.imgSrc"
+            [id]="shop.id"
+        ></app-shop>
+    </div>
 </div>
 <router-outlet></router-outlet>
