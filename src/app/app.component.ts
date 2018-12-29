@@ -61,9 +61,11 @@ export class AppComponent implements OnInit {
     }
 
     private getLocation() {
-        return new Promise((resolve, reject) =>
-            navigator.geolocation.getCurrentPosition(resolve, reject, {})
-        ).then(
+        return new Promise((resolve, reject) => {
+            if (navigator && navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(resolve, reject, {});
+            }
+        }).then(
             (result: any) =>
                 "" + result.coords.latitude + "," + result.coords.longitude
         );

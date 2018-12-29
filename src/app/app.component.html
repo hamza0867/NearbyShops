@@ -1,19 +1,29 @@
-<!--The content below is only a placeholder and can be replaced.-->
 <div class="container">
-    <div class="row border-bottom" id="header">
-        <div
-            id="title"
-            class="col-lg-8 col-md-8 col-sm-8 col-xs-8 d-flex align-items-center "
-        >
-            <h1
-                style="text-align: center;"
-                class="col-lg-12 col-md-12 col-sm-12 col-xs-12"
+    <div class="row" id="header">
+        <div class="row">
+            <div
+                id="title"
+                class="col-lg-8 col-md-8 col-sm-12 col-xs-12 d-flex align-items-center "
             >
-                Welcome to {{ title }}!
-            </h1>
+                <h1
+                    style="text-align: center;"
+                    class="col-lg-12 col-md-12 col-sm-12 col-xs-12"
+                >
+                    Welcome to {{ title }}!
+                </h1>
+            </div>
+            <div
+                class="col-lg-2 col-md-2 d-lg-block d-md-block d-sm-none d-none"
+            >
+                <img src="{{ logo }}" alt="" />
+            </div>
         </div>
-        <div class="col-lg-3 col-md-3 col-sm-2 col-2">
-            <img src="{{ logo }}" alt="" />
+        <div class="row">
+            <div
+                class="d-lg-none d-md-none d-sm-block d-block col-sm-10 offset-sm-2 col-xs-10 offset-xs-1"
+            >
+                <img id="img-logo" src="{{ logo }}" alt="" />
+            </div>
         </div>
     </div>
     <div class="row">
