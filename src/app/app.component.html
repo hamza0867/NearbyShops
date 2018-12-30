@@ -18,24 +18,27 @@
                 <img src="{{ logo }}" alt="" />
             </div>
         </div>
-        <div class="row">
+        <div class="row d-lg-none d-md-none">
             <div
-                class="d-lg-none d-md-none d-sm-block d-block col-sm-10 offset-sm-2 col-xs-10 offset-xs-1"
+                class="d-sm-block d-block col-sm-10 offset-sm-2 col-xs-10 offset-xs-1"
             >
                 <img id="img-logo" src="{{ logo }}" alt="" />
             </div>
         </div>
     </div>
-    <div class="row">
-        <app-shop
-            class="col-lg-3 col-md-4 col-sm-8 col-8"
-            *ngFor="let shop of shops"
-            [shopName]="shop.name"
-            [imgSrc]="shop.imgSrc"
-            [id]="shop.id"
-            [liked]="shop.liked"
-            [disliked]="shop.disliked"
-        ></app-shop>
-    </div>
+
+    <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+        <ul class="navbar-nav">
+            <li class="nav-item active">
+                <a class="nav-link" href="#">Authenticate</a>
+            </li>
+            <li class="nav-item"><a class="nav-link" href="#">Explore</a></li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">My Liked Shops</a>
+            </li>
+        </ul>
+    </nav>
+    <br />
+    <br />
+    <router-outlet></router-outlet>
 </div>
-<router-outlet></router-outlet>

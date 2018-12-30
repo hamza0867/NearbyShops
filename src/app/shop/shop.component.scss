@@ -12,10 +12,15 @@
 
 button {
   box-shadow: 5px 10px 18px #888;
+  text-align: center;
 }
 
 #image {
   width: auto;
   height: 200px;
   margin: 10px;
+}
+
+#likeDislike {
+  margin: 0 15px;
 }
