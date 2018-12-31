@@ -1,0 +1,17 @@
+<h2 style="text-align: center;">Authentication</h2>
+<button
+    style="align-self: center;"
+    class="btn btn-success"
+    *ngIf="!authStatus"
+    (click)="onSignIn()"
+>
+    Se connecter
+</button>
+<button
+    style="align-self: center;"
+    class="btn btn-danger"
+    *ngIf="authStatus"
+    (click)="onSignOut()"
+>
+    Se déconnecter
+</button>
