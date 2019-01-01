@@ -1,4 +1,5 @@
 import { Component, OnInit } from "@angular/core";
+import { Subscription } from "rxjs";
 import { ShopService } from "../services/shop.service";
 import { Shop } from "../shop/shop";
 
@@ -8,11 +9,18 @@ import { Shop } from "../shop/shop";
     styleUrls: ["./shops-view.component.scss"]
 })
 export class ShopsViewComponent implements OnInit {
-    public shops: Shop[];
+    private shops: Shop[];
+    private shopSubscription: Subscription;
 
-    constructor(private shopService: ShopService) {}
+    constructor(private shopService: ShopService) {
+    }
 
     public ngOnInit() {
-        this.shops = this.shopService.shops;
+        this.shopSubscription = this.shopService.shopSubject.subscribe(
+            (shops: Shop[]) => {
+                this.shops = shops;
+            }
+        );
+        this.shopService.emitShopSubject();
     }
 }

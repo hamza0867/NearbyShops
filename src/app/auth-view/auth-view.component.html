@@ -1,17 +1,37 @@
 <h2 style="text-align: center;">Authentication</h2>
-<button
-    style="align-self: center;"
-    class="btn btn-success"
-    *ngIf="!authStatus"
-    (click)="onSignIn()"
->
-    Se connecter
-</button>
-<button
-    style="align-self: center;"
-    class="btn btn-danger"
-    *ngIf="authStatus"
-    (click)="onSignOut()"
->
+
+<div class="row" *ngIf="!authStatus">
+    <div
+        class="col-lg-10 col-lg-offset-2 col-md-10 col-md-offset-2 col-sm-10 col-sm-offset-1 col-10 col-offset-1"
+    >
+        <form (ngSubmit)="onSignIn(f)" #f="ngForm">
+            <div class="form-group">
+                <label for="userName">user name</label>
+                <input
+                    type="text"
+                    class="form-control"
+                    id="userName"
+                    name="userName"
+                    placeholder="Enter user name"
+                    ngModel
+                />
+            </div>
+            <div class="form-group">
+                <label for="pass">Password</label>
+                <input
+                    type="password"
+                    class="form-control"
+                    id="pass"
+                    placeholder="Password"
+                    name="pass"
+                    ngModel
+                />
+            </div>
+            <input type="submit" class="btn btn-primary" value="Sign In" />
+        </form>
+    </div>
+</div>
+
+<button class="btn btn-danger" *ngIf="authStatus" (click)="onSignOut()">
     Se déconnecter
 </button>

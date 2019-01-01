@@ -1,6 +1,13 @@
-<div class="shop col-12">
+<div
+    [ngClass]="{
+        shop: true,
+        'col-12': true,
+        'list-group-item-success': liked === true,
+        'list-group-item-danger': disliked === true
+    }"
+>
     <div class="row">
-        <div id="shopName" class="col-12">{{ displayName }}</div>
+        <div id="shopName" class="col-12">{{ shopName }}</div>
     </div>
     <div id="image" class="row">
         <img class="col-12" [src]="imgSrc" alt="" />

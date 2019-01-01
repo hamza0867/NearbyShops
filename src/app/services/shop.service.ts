@@ -1,7 +1,9 @@
+import { Subject } from "rxjs";
 import { Shop } from "../shop/shop";
 
 export class ShopService {
-    public shops: Shop[];
+    public shopSubject = new Subject<Shop[]>();
+    private shops: Shop[];
 
     constructor() {
         this.shops = [];
@@ -31,13 +33,20 @@ export class ShopService {
             );
     }
 
+    public emitShopSubject() {
+        this.shopSubject.next(this.shops.slice());
+    }
+
     public like(id: string) {
         this.shops.find(item => item.id === id).like();
+        this.emitShopSubject();
     }
 
     public dislike(id: string) {
         this.shops.find(item => item.id === id).dislike();
+        this.emitShopSubject();
     }
+
     private getFullUrl(myLocation) {
         // The url of the Here API where I get the list of nearby shops
         const getPlacesUrl =
