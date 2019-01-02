@@ -30,6 +30,7 @@ export class ShopService {
                         );
                         return this.shops;
                     })
+                    .then(() => this.emitShopSubject())
             );
     }
 
