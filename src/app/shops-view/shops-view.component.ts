@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnDestroy, OnInit } from "@angular/core";
 import { Subscription } from "rxjs";
 import { ShopService } from "../services/shop.service";
 import { Shop } from "../shop/shop";
@@ -8,11 +8,12 @@ import { Shop } from "../shop/shop";
     templateUrl: "./shops-view.component.html",
     styleUrls: ["./shops-view.component.scss"]
 })
-export class ShopsViewComponent implements OnInit {
+export class ShopsViewComponent implements OnInit, OnDestroy {
     private shops: Shop[];
     private shopSubscription: Subscription;
 
     constructor(private shopService: ShopService) {
+        this.ngOnInit();
     }
 
     public ngOnInit() {
@@ -22,5 +23,9 @@ export class ShopsViewComponent implements OnInit {
             }
         );
         this.shopService.emitShopSubject();
+    }
+
+    public ngOnDestroy() {
+        this.shopSubscription.unsubscribe();
     }
 }
