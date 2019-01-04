@@ -1,0 +1,11 @@
+<div class="row">
+    <app-shop
+        class="col-lg-3 col-md-4 col-sm-8 col-8"
+        *ngFor="let shop of likedShops"
+        [shopName]="shop.name"
+        [imgSrc]="shop.imgSrc"
+        [id]="shop.id"
+        [liked]="shop.liked"
+        [disliked]="shop.disliked"
+    ></app-shop>
+</div>

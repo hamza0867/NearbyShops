@@ -1,0 +1,29 @@
+<div
+    [ngClass]="{
+        shop: true,
+        'col-12': true,
+        'list-group-item-success': liked === true,
+        'list-group-item-danger': disliked === true
+    }"
+>
+    <div class="row">
+        <div id="shopName" class="col-12">{{ shopName }}</div>
+    </div>
+    <div id="image" class="row">
+        <img class="col-12" [src]="imgSrc" alt="" />
+    </div>
+    <div class="row" id="likeDislikeButton">
+        <button
+            class="btn btn-success col-lg-4 col-md-4 col-sm-4 col-xs-4 offset-lg-1 offset-md-1 offset-sm-1 offset-xs-1"
+            (click)="onLike()"
+        >
+            Like
+        </button>
+        <button
+            class="btn btn-danger col-lg-4 col-md-4 col-sm-4 col-xs-4 offset-lg-2 offset-md-2 offset-sm-2 offset-xs-2"
+            (click)="onDislike()"
+        >
+            Dislike
+        </button>
+    </div>
+</div>
