@@ -4,6 +4,7 @@ import { User } from "../models/user";
 import { AuthService } from "../services/auth.service";
 import { Subscription } from "rxjs";
 import { Router } from "@angular/router";
+import { Md5 } from "ts-md5/dist/md5";
 
 @Component({
     selector: "app-login",
@@ -41,7 +42,8 @@ export class LoginComponent implements OnInit, OnDestroy {
 
     onSubmitForm() {
         const formValue = this.userForm.value;
-        if (this.authService.login(formValue["userName"], formValue["pass"])) {
+        const pass = Md5.hashStr(formValue["pass"]).toString();
+        if (this.authService.login(formValue["userName"], pass)) {
             this.router.navigate(["/shops"]);
         }
     }
