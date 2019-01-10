@@ -15,16 +15,16 @@ export class AuthService {
         this.authSubject.next(this.isAuth);
     }
 
-    public login(userName: string, pass: string) {
+    public async login(userName: string, pass: string) {
         const currentUser = this.userService.getUser(userName, pass);
         if (currentUser === undefined) {
             alert("the user " + userName + " does't exist");
             return false;
         }
-        this.currentUser = currentUser;
+        this.currentUser = await currentUser;
         this.isAuth = true;
         this.emitAuth();
-        alert("You are now connected as " + currentUser.userName);
+        alert("You are now connected as " + this.currentUser.userName);
         return true;
     }
 

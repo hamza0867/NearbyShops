@@ -7,8 +7,8 @@ import { Subject } from "rxjs";
 export class RegisterService {
     constructor(private userService: UserService) {}
 
-    public register(userName: string, pass: string) {
-        if (this.userService.addUser(userName, pass)) {
+    public async register(userName: string, pass: string) {
+        if ((await this.userService.addUser(userName, pass)) !== null) {
             alert("The user " + userName + " has been successfully registered");
             return true;
         }

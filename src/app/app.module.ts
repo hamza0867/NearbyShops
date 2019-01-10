@@ -16,6 +16,7 @@ import { AuthGuard } from "./services/auth-guard.service";
 import { RegisterComponent } from "./register/register.component";
 import { RegisterService } from "./services/register.service";
 import { NotAuthGuard } from "./services/not-auth-guard.service";
+import { HttpClientModule } from "@angular/common/http";
 
 @NgModule({
     declarations: [
@@ -31,7 +32,8 @@ import { NotAuthGuard } from "./services/not-auth-guard.service";
         BrowserModule,
         AppRoutingModule,
         FormsModule,
-        ReactiveFormsModule
+        ReactiveFormsModule,
+        HttpClientModule
     ],
     providers: [
         UserService,

@@ -2,36 +2,60 @@ import { Injectable } from "@angular/core";
 import { User } from "../models/user";
 import { Subject } from "rxjs";
 import { Shop } from "../shop/shop";
+import {
+    HttpClient,
+    HttpParams,
+    HttpHeaders,
+    HttpResponse
+} from "@angular/common/http";
 
 @Injectable()
 export class UserService {
-    private users: User[] = [
-        new User(
-            "hamza",
-            "hamza",
-            [new Shop("A Shop", "../../assets/ur.png", "1")],
-            []
-        )
-    ];
-    usersSubject = new Subject<User[]>();
-    constructor() {}
+    private user: User;
+    usersSubject = new Subject<User>();
+    private serverUrl = "http://localhost:8080/nbshops/";
+    constructor(private httpClient: HttpClient) {}
 
-    emitUers() {
-        this.usersSubject.next(this.users.slice());
+    emitUer() {
+        this.usersSubject.next(this.user);
     }
 
-    public addUser(userName: string, pass: string) {
-        if (this.users.find(user => user.userName === userName) === undefined) {
-            this.users.push(new User(userName, pass, [], []));
-            this.emitUers();
-            return true;
-        }
-        return false;
+    public async addUser(username: string, pwd: string) {
+        const serviceUrl = this.serverUrl + "users/new";
+        const headers = new HttpHeaders({
+            "Content-Type": "application/x-www-form-urlencoded"
+        });
+        const body = new HttpParams()
+            .set("userName", username)
+            .set("pass", pwd);
+        let result = await this.httpClient
+            .post(serviceUrl, body.toString(), {
+                headers
+            })
+            .subscribe(
+                res => {},
+                err => {
+                    console.log(err);
+                }
+            );
     }
 
-    public getUser(userName: string, pass: string) {
-        return this.users.find(
-            usr => usr.userName === userName && usr.pass === pass
-        );
+    public async getUser(username: string, pwd: string): Promise<User> {
+        const serviceUrl = this.serverUrl + "user/";
+        const headers = new HttpHeaders({
+            "Content-Type": "application/x-www-form-urlencoded"
+        });
+        const body = new HttpParams()
+            .set("userName", username)
+            .set("pass", pwd);
+        let result = await this.httpClient
+            .post(serviceUrl, body.toString(), {
+                headers
+            })
+            .toPromise()
+            .then((res: User) => {
+                return res;
+            });
+        return result;
     }
 }
