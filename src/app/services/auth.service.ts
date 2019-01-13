@@ -40,15 +40,22 @@ export class AuthService {
             alert("the user " + userName + " does't exist");
             return false;
         }
-        this.currentUser = await currentUser;
-        this.isAuth = true;
-        currentUser.then(x => {
-            this.emitCurrentUser();
-            console.log(this.currentUser);
-        });
-        this.emitAuth();
-        alert("You are now connected as " + this.currentUser.userName);
-        return true;
+        if ((await currentUser) !== null) {
+            this.currentUser = await currentUser;
+            this.isAuth = true;
+            currentUser.then(x => {
+                this.emitCurrentUser();
+            });
+            this.emitAuth();
+            alert("You are now connected as " + this.currentUser.userName);
+            return true;
+        }
+        alert(
+            "The user " +
+                userName +
+                " doesn't exist! You might want to consider registering"
+        );
+        return false;
     }
 
     public getCurrentUser() {
@@ -67,7 +74,11 @@ export class AuthService {
             alert("This operation is only available for registered users");
             return;
         }
-        const serviceUrl = this.serverUrl + "shops/like/";
+        let serviceUrl;
+        serviceUrl = this.serverUrl + "shops/like/";
+        if (this.currentUser.likedShops.find(x => x.id === shop.id)) {
+            serviceUrl = this.serverUrl + "shops/unlike/";
+        }
         const headers = new HttpHeaders({
             "Content-Type": "application/x-www-form-urlencoded"
         });
@@ -79,6 +90,8 @@ export class AuthService {
             .post(serviceUrl, body.toString(), { headers })
             .toPromise()
             .then((res: Shop[]) => res);
+        this.currentUser.likedShops = result;
+        this.emitCurrentUser();
         return result;
     }
 }

@@ -16,7 +16,7 @@ export class LikedShopsViewComponent implements OnInit {
 
     ngOnInit() {
         this.likedShopSubscription = this.likedShopsService.shopSubject.subscribe(
-            (shops: Shop[]) => {
+            shops => {
                 this.likedShops = shops;
             }
         );

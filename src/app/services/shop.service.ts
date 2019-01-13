@@ -40,6 +40,8 @@ export class ShopService {
         this.shopSubject.next(this.shops.slice());
     }
 
+    public updateShops(likedShops: Shop[]) {}
+
     private getFullUrl(myLocation) {
         // The url of the Here API where I get the list of nearby shops
         const getPlacesUrl =

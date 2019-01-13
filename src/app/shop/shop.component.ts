@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from "@angular/core";
-import { UserService } from "../services/user.service";
+import { Shop } from "../models/shop";
+import { AuthService } from "../services/auth.service";
 
 @Component({
     selector: "app-shop",
@@ -11,11 +12,15 @@ export class ShopComponent implements OnInit {
     @Input() public imgSrc: string;
     @Input() public id: string;
 
-    constructor(public userService: UserService) {}
+    constructor(private authService: AuthService) {}
 
     public ngOnInit() {}
 
-    public onLike() {}
+    public onLike() {
+        this.authService.likeShop(
+            new Shop(this.shopName, this.imgSrc, this.id)
+        );
+    }
 
     public onDislike() {}
 }

@@ -1,6 +1,7 @@
 import { Injectable } from "@angular/core";
+import { AuthService } from "./auth.service";
 import { User } from "../models/user";
-import { Subject } from "rxjs";
+import { Subject, Subscription } from "rxjs";
 import { Shop } from "../models/shop";
 import {
     HttpClient,
@@ -11,14 +12,9 @@ import {
 
 @Injectable()
 export class UserService {
-    private user: User;
-    usersSubject = new Subject<User>();
     private serverUrl = "http://localhost:8080/nbshops/";
+    private currentUserSubscription: Subscription;
     constructor(private httpClient: HttpClient) {}
-
-    emitUer() {
-        this.usersSubject.next(this.user);
-    }
 
     public async addUser(username: string, pwd: string) {
         const serviceUrl = this.serverUrl + "users/new";
@@ -32,12 +28,9 @@ export class UserService {
             .post(serviceUrl, body.toString(), {
                 headers
             })
-            .subscribe(
-                res => {},
-                err => {
-                    console.log(err);
-                }
-            );
+            .toPromise()
+            .then(x => x);
+        return result;
     }
 
     public async getUser(username: string, pwd: string): Promise<any> {
