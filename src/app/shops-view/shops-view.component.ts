@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from "@angular/core";
 import { Subscription } from "rxjs";
 import { ShopService } from "../services/shop.service";
-import { Shop } from "../shop/shop";
+import { Shop } from "../models/shop";
 
 @Component({
     selector: "app-shops-view",

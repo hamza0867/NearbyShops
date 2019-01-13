@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { Shop } from "../shop/shop";
+import { Shop } from "../models/shop";
 import { Subscription } from "rxjs";
 import { LikedShopsService } from "../services/liked-shops.service";
 
@@ -20,6 +20,6 @@ export class LikedShopsViewComponent implements OnInit {
                 this.likedShops = shops;
             }
         );
-        this.likedShopsService.emitShopSubject();
+        this.likedShopsService.emitShops();
     }
 }

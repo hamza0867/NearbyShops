@@ -1,5 +1,5 @@
 import { Subject } from "rxjs";
-import { Shop } from "../shop/shop";
+import { Shop } from "../models/shop";
 import { Injectable } from "@angular/core";
 
 @Injectable()
@@ -38,16 +38,6 @@ export class ShopService {
 
     public emitShopSubject() {
         this.shopSubject.next(this.shops.slice());
-    }
-
-    public like(id: string) {
-        this.shops.find(item => item.id === id).like();
-        this.emitShopSubject();
-    }
-
-    public dislike(id: string) {
-        this.shops.find(item => item.id === id).dislike();
-        this.emitShopSubject();
     }
 
     private getFullUrl(myLocation) {

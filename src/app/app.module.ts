@@ -11,6 +11,7 @@ import { ShopsViewComponent } from "./shops-view/shops-view.component";
 import { ShopService } from "./services/shop.service";
 import { FourOhFourComponent } from "./four-oh-four/four-oh-four.component";
 import { AuthService } from "../app/services/auth.service";
+import { LikedShopsService } from "./services/liked-shops.service";
 import { LikedShopsViewComponent } from "./liked-shops-view/liked-shops-view.component";
 import { AuthGuard } from "./services/auth-guard.service";
 import { RegisterComponent } from "./register/register.component";
@@ -42,7 +43,8 @@ import { HttpClientModule } from "@angular/common/http";
         ShopService,
         AuthGuard,
         RegisterService,
-        NotAuthGuard
+        NotAuthGuard,
+        LikedShopsService
     ],
     bootstrap: [AppComponent]
 })

@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { User } from "../models/user";
 import { Subject } from "rxjs";
-import { Shop } from "../shop/shop";
+import { Shop } from "../models/shop";
 import {
     HttpClient,
     HttpParams,
@@ -40,7 +40,7 @@ export class UserService {
             );
     }
 
-    public async getUser(username: string, pwd: string): Promise<User> {
+    public async getUser(username: string, pwd: string): Promise<any> {
         const serviceUrl = this.serverUrl + "user/";
         const headers = new HttpHeaders({
             "Content-Type": "application/x-www-form-urlencoded"
@@ -53,7 +53,7 @@ export class UserService {
                 headers
             })
             .toPromise()
-            .then((res: User) => {
+            .then(res => {
                 return res;
             });
         return result;
