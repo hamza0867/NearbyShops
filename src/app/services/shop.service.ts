@@ -1,13 +1,41 @@
-import { Subject } from "rxjs";
+import { Subject, Subscription, BehaviorSubject } from "rxjs";
 import { Shop } from "../models/shop";
 import { Injectable } from "@angular/core";
+import { LikedShopsService } from "./liked-shops.service";
 
 @Injectable()
 export class ShopService {
-    public shopSubject = new Subject<Shop[]>();
+    public shopSubject;
+    private likedShopsSubscription: Subscription;
+    private originalList: Shop[];
     private shops: Shop[];
 
-    constructor() {
+    constructor(private likedShopService: LikedShopsService) {
+        this.fillShops().then(x => {
+            this.originalList = x;
+        });
+        this.shopSubject = new BehaviorSubject<Shop[]>(this.shops);
+        this.likedShopsSubscription = this.likedShopService.shopSubject.subscribe(
+            likedShops => {
+                this.updateShops(likedShops);
+                this.emitShopSubject();
+            }
+        );
+    }
+
+    private async updateShops(likedShops: Shop[]) {
+        function removeLiked(original, toRemove) {
+            function removeOne(arr, elt) {
+                return arr.filter(el => el.id !== elt.id);
+            }
+            let res = original;
+            toRemove.forEach(elt => (res = removeOne(res, elt)));
+            return res;
+        }
+        this.shops = removeLiked(this.originalList, likedShops);
+    }
+
+    private async fillShops() {
         this.shops = [];
         this.getLocation()
             .then(result => this.getFullUrl(result))
@@ -32,15 +60,13 @@ export class ShopService {
                         );
                         return this.shops;
                     })
-                    .then(() => this.emitShopSubject())
             );
+        return this.shops;
     }
 
     public emitShopSubject() {
         this.shopSubject.next(this.shops.slice());
     }
-
-    public updateShops(likedShops: Shop[]) {}
 
     private getFullUrl(myLocation) {
         // The url of the Here API where I get the list of nearby shops

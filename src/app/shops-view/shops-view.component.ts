@@ -8,7 +8,6 @@ import { Shop } from "../models/shop";
     templateUrl: "./shops-view.component.html",
     styleUrls: ["./shops-view.component.scss"]
 })
-
 export class ShopsViewComponent implements OnInit, OnDestroy {
     private shops: Shop[];
     private shopSubscription: Subscription;
@@ -21,7 +20,6 @@ export class ShopsViewComponent implements OnInit, OnDestroy {
                 this.shops = shops;
             }
         );
-        this.shopService.emitShopSubject();
     }
 
     public ngOnDestroy() {
