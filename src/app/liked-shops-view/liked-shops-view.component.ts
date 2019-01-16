@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, OnDestroy } from "@angular/core";
 import { Shop } from "../models/shop";
 import { Subscription } from "rxjs";
 import { LikedShopsService } from "../services/liked-shops.service";
@@ -8,7 +8,7 @@ import { LikedShopsService } from "../services/liked-shops.service";
     templateUrl: "./liked-shops-view.component.html",
     styleUrls: ["./liked-shops-view.component.scss"]
 })
-export class LikedShopsViewComponent implements OnInit {
+export class LikedShopsViewComponent implements OnInit, OnDestroy {
     private likedShops: Shop[] = [];
     private likedShopSubscription: Subscription;
 
@@ -21,5 +21,9 @@ export class LikedShopsViewComponent implements OnInit {
             }
         );
         this.likedShopsService.emitShops();
+    }
+
+    ngOnDestroy() {
+        this.likedShopSubscription.unsubscribe();
     }
 }
